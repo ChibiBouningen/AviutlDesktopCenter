@@ -40,12 +40,6 @@ namespace AviutlDesktopCenter
 
         }
 
-        public void settxt(string a)
-        {
-
-            txt = a;
-        }
-
 
 
         public void make(profile catchProfile)

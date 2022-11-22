@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
@@ -7,23 +8,26 @@ namespace AviutlDesktopCenter
     {
 
         private GroupBox[] groupBoxes;
+        save save = new save();
         private selectPanel[] selectP;
+
         private string selectPropID;
         List<profile> profileList = new List<profile>();
 
-
-        int panelcnt = 0;
         public Form1()
         {
             InitializeComponent();
             this.groupBoxes = null;
             selectPropID = null;
-            SelectPanel_load(profileList);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             profileTitleLabel.Text = "‚ ‚ ";
+            savedata_load();
+            SelectPanel_load(profileList);
+            infoPanel_load(profileList[0].pID);
         }
 
         private void newAviutl_button_Click(object sender, EventArgs e)
@@ -39,19 +43,28 @@ namespace AviutlDesktopCenter
             f.frm1 = this;
             f.ShowDialog();
 
-            p.path = f.filePathBox.Text;
-            p.name = f.propertyNameBox.Text;
-            p.pID = DateTime.Now.ToString("yyyyMMddHHmmss");
+            try
+            {
+                p.path = f.filePathBox.Text;
+                p.name = f.propertyNameBox.Text;
+                p.pID = DateTime.Now.ToString("yyyyMMddHHmmss");
 
-            Icon icnKari = Icon.ExtractAssociatedIcon(p.path);
-            p.icon = icnKari.ToBitmap();
+                Icon icnKari = Icon.ExtractAssociatedIcon(p.path);
+                p.icon = icnKari.ToBitmap();
 
-            profileList.Add(p);
+                profileList.Add(p);
+                SelectPanel_load(profileList);
+                infoPanel_load(p.pID);
+
+                save.saveFiles(p);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
             f.Dispose();
-
-            SelectPanel_load(profileList);
-            infoPanel_load(p.pID);
+            
         }
 
         private void SelectPanel_load(List<profile> profiles)
@@ -77,6 +90,12 @@ namespace AviutlDesktopCenter
             selectPropID = viewID;
         }
 
-        
+        private void savedata_load()
+        {
+            int i;
+            i = save.loadFiles(ref profileList);
+            //MessageBox.Show(profileList[0].name);
+
+        }
     }
 }
