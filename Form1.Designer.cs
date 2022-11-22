@@ -33,8 +33,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.newAviutl_button = new System.Windows.Forms.Button();
+            this.profileTitleLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -55,6 +57,10 @@
             this.splitContainer.Panel1.AutoScroll = true;
             this.splitContainer.Panel1.Controls.Add(this.splitContainer1);
             this.splitContainer.Panel1MinSize = 250;
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.profileTitleLabel);
             this.splitContainer.Size = new System.Drawing.Size(800, 450);
             this.splitContainer.SplitterDistance = 250;
             this.splitContainer.TabIndex = 0;
@@ -106,6 +112,16 @@
             this.newAviutl_button.UseVisualStyleBackColor = true;
             this.newAviutl_button.Click += new System.EventHandler(this.newAviutl_button_Click);
             // 
+            // profileTitleLabel
+            // 
+            this.profileTitleLabel.AutoSize = true;
+            this.profileTitleLabel.Font = new System.Drawing.Font("Yu Gothic UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.profileTitleLabel.Location = new System.Drawing.Point(123, 44);
+            this.profileTitleLabel.Name = "profileTitleLabel";
+            this.profileTitleLabel.Size = new System.Drawing.Size(63, 25);
+            this.profileTitleLabel.TabIndex = 0;
+            this.profileTitleLabel.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -115,7 +131,10 @@
             this.Controls.Add(this.splitContainer);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -136,5 +155,6 @@
         private Button newAviutl_button;
         private Panel panel1;
         private PictureBox pictureBox1;
+        public Label profileTitleLabel;
     }
 }

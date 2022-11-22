@@ -11,17 +11,26 @@ namespace AviutlDesktopCenter
     {
 
         private PictureBox iconBox;
+        private profile p;
+        private Form1 frm1;
         string txt;
 
-        public selectPanel()
+        public selectPanel(Form1 form1)
         {
             
+            this.frm1 = form1;
+
             this.Size = new Size(100,100);
             this.Location=new Point(10,300);
             this.Dock = DockStyle.Top;
 
+            this.Click += new EventHandler(ClickEvent);
+            this.DoubleClick += new EventHandler(DoubleClickEvent);
+
+
             this.iconBox = new PictureBox();
             this.Controls.Add(this.iconBox);
+            this.iconBox.SizeMode=PictureBoxSizeMode.StretchImage;
             this.iconBox.Location = new Point(10,25);
             this.iconBox.Dock = DockStyle.None;
             this.iconBox.Size = new Size(60, 60);
@@ -31,21 +40,40 @@ namespace AviutlDesktopCenter
 
         }
 
-        public void settxt(int a)
+        public void settxt(string a)
         {
-            txt = a.ToString();
+
+            txt = a;
         }
 
 
 
-        public void eventMake()
+        public void make(profile catchProfile)
         {
-            this.Click += new EventHandler(ClickEvent);
+            
+            p = catchProfile;
+
+            this.iconBox.Image = p.icon;
         }
 
         public void ClickEvent(object sender, EventArgs e)
         {
-            MessageBox.Show(txt);
+            //MessageBox.Show(txt);
+            frm1.infoPanel_load(p.pID);
+
+        }
+
+        public void DoubleClickEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(p.path);
+            }
+            catch
+            {
+                MessageBox.Show("起動できませんでした。");
+            }
+            
         }
     }
 }
