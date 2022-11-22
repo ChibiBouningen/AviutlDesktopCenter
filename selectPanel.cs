@@ -11,9 +11,9 @@ namespace AviutlDesktopCenter
     {
 
         private PictureBox iconBox;
+        private Label title;
         private profile p;
         private Form1 frm1;
-        string txt;
 
         public selectPanel(Form1 form1)
         {
@@ -23,7 +23,6 @@ namespace AviutlDesktopCenter
             this.Size = new Size(100,100);
             this.Location=new Point(10,300);
             this.Dock = DockStyle.Top;
-
             this.Click += new EventHandler(ClickEvent);
             this.DoubleClick += new EventHandler(DoubleClickEvent);
 
@@ -37,17 +36,28 @@ namespace AviutlDesktopCenter
             this.iconBox.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
             this.iconBox.BackColor = Color.Blue;
             this.iconBox.Margin = new Padding(99);
+            this.iconBox.Click+=new EventHandler(ClickEvent);
+            this.iconBox.DoubleClick+=new EventHandler(DoubleClickEvent);
 
+            this.title = new Label();
+            this.Controls.Add(this.title);
+            this.title.Location = new Point(100,40);
+            this.title.Size = new Size(100, 30);
+            this.title.AutoSize = false;
+            this.title.Anchor = (AnchorStyles.Top | AnchorStyles.Left);
+            this.title.Font = new Font(title.Font.Name, 15, title.Font.Style);
+            this.title.Click+=new EventHandler(ClickEvent);
+            this.title.DoubleClick+=new EventHandler(DoubleClickEvent);
         }
 
 
 
         public void make(profile catchProfile)
-        {
-            
+        { 
             p = catchProfile;
 
             this.iconBox.Image = p.icon;
+            this.title.Text = p.name;
         }
 
         public void ClickEvent(object sender, EventArgs e)

@@ -68,6 +68,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -81,7 +83,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.newAviutl_button);
             this.splitContainer1.Size = new System.Drawing.Size(250, 450);
-            this.splitContainer1.SplitterDistance = 405;
+            this.splitContainer1.SplitterDistance = 421;
             this.splitContainer1.TabIndex = 0;
             // 
             // panel1
@@ -104,11 +106,12 @@
             // 
             this.newAviutl_button.AutoSize = true;
             this.newAviutl_button.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.newAviutl_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.newAviutl_button.Location = new System.Drawing.Point(0, 0);
             this.newAviutl_button.Name = "newAviutl_button";
-            this.newAviutl_button.Size = new System.Drawing.Size(250, 41);
+            this.newAviutl_button.Size = new System.Drawing.Size(250, 25);
             this.newAviutl_button.TabIndex = 0;
-            this.newAviutl_button.Text = "Add AviUtl";
+            this.newAviutl_button.Text = "+";
             this.newAviutl_button.UseVisualStyleBackColor = true;
             this.newAviutl_button.Click += new System.EventHandler(this.newAviutl_button_Click);
             // 
