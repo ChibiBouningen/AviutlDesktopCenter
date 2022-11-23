@@ -44,6 +44,9 @@ namespace AviutlDesktopCenter
                             case "name":
                                 p.name = line[1];
                                 break;
+                            case "priority":
+                                p.priority = int.Parse(line[1]);
+                                break;
                             default:
                                 break;
                         }
@@ -79,6 +82,7 @@ namespace AviutlDesktopCenter
                 sw.WriteLine(String.Format("id,{0}", p.pID));
                 sw.WriteLine(String.Format("path,{0}", p.path));
                 sw.WriteLine(String.Format("name,{0}", p.name));
+                sw.WriteLine(String.Format("priority,{0}", p.priority));
 
                 p.icon.Save(prop_path+p.pID+".png",System.Drawing.Imaging.ImageFormat.Png);
                 sw.Close();

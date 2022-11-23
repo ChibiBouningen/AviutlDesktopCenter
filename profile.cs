@@ -12,5 +12,6 @@ namespace AviutlDesktopCenter
         public string path;
         public string name;
         public Bitmap icon;
+        public int priority;
     }
 }

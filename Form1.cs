@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace AviutlDesktopCenter
@@ -26,8 +27,8 @@ namespace AviutlDesktopCenter
         {
             profileTitleLabel.Text = "‚ ‚ ";
             savedata_load();
-            SelectPanel_load(profileList);
-            infoPanel_load(profileList[0].pID);
+            SelectPanel_load();
+            if(profileList.Count > 0) infoPanel_load(profileList[profileList.Count - 1].pID);
         }
 
         private void newAviutl_button_Click(object sender, EventArgs e)
@@ -51,33 +52,37 @@ namespace AviutlDesktopCenter
 
                 Icon icnKari = Icon.ExtractAssociatedIcon(p.path);
                 p.icon = icnKari.ToBitmap();
-
-                profileList.Add(p);
-                SelectPanel_load(profileList);
-                infoPanel_load(p.pID);
+                p.priority = 3;
 
                 save.saveFiles(p);
+
+                profileList.Add(p);
+                SelectPanel_load();
+                infoPanel_load(p.pID);
+
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
 
             f.Dispose();
             
         }
 
-        private void SelectPanel_load(List<profile> profiles)
+        private void SelectPanel_load()
         {
-            selectP = new selectPanel[profiles.Count];
+            selectP = new selectPanel[profileList.Count];
 
             this.splitContainer1.Panel1.Controls.Clear();
 
-            for (int i = 0; i < profiles.Count; i++)
+            profileList.Sort((a,b)=> a.priority - b.priority);
+
+            for (int i = 0; i < profileList.Count; i++)
             {
                 selectP[i] = new selectPanel(this);
                 this.splitContainer1.Panel1.Controls.Add(selectP[i]);
-                selectP[i].make(profiles[i]);
+                selectP[i].make(profileList[i]);
                 //selectP[i].settxt(profiles[i].path);
             }
         }
@@ -96,6 +101,23 @@ namespace AviutlDesktopCenter
             i = save.loadFiles(ref profileList);
             //MessageBox.Show(profileList[0].name);
 
+        }
+
+        private void settingButton_Click(object sender, EventArgs e)
+        {
+            int view = profileList.FindIndex(item => item.pID == selectPropID);
+            settingWindow sW = new settingWindow(profileList[view]);
+            sW.frm1=this;
+            sW.ShowDialog();
+            if(sW.act==1)
+            {
+                profileList[view] = sW.p;
+                SelectPanel_load();
+                infoPanel_load(selectPropID);
+                save.saveFiles(profileList[view]);
+            }
+
+            sW.Dispose();
         }
     }
 }
